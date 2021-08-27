@@ -65,7 +65,8 @@ class Api {
   Future<TodoModel> updateToDo(int id, TodoModel model) async {
     try {
       final _url = "/todo/todo-update/$id/";
-      final _res = await _client.post(appUrl(_url), body: model.toJson());
+      final _res =
+          await _client.post(appUrl(_url), body: jsonEncode(model.toJson()));
       if (_res.statusCode != 200) throw Exception();
       final Map<String, dynamic> _body = jsonDecode(_res.body);
       return TodoModel.fromJson(_body);
@@ -80,8 +81,8 @@ class Api {
       final _url = "/todo/todo-delete/$id/";
       final _res = await _client.delete(appUrl(_url));
       if (_res.statusCode != 200) throw Exception();
-      final Map<String, dynamic> _body = jsonDecode(_res.body);
-      return _body as String;
+      // final Map<String, dynamic> _body = jsonDecode(_res.body);
+      return _res.body.toString();
     } catch (e) {
       print(e);
       throw Exception();

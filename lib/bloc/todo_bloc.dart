@@ -42,11 +42,11 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       yield _res.fold(
         (l) => TodoError(l),
         (todo) {
-          final _list = event.todo
-            ..remove(event.editedTodo)
+          event.todo
+            ..removeWhere((item) => item.id == event.id)
             ..insert(event.index, todo);
 
-          return TodoSuccess(todo: _list);
+          return TodoSuccess(todo: event.todo);
         },
       );
     }
@@ -56,8 +56,8 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       yield _res.fold(
         (l) => TodoError(l),
         (r) {
-          final _list = event.todo..removeWhere((item) => item.id == event.id);
-          return TodoSuccess(todo: _list);
+          event.todo..removeWhere((item) => item.id == event.id);
+          return TodoSuccess(todo: event.todo);
         },
       );
     }

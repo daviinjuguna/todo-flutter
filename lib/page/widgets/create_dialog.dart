@@ -36,10 +36,6 @@ class _CreateDialogState extends State<CreateDialog> {
         children: [
           TextField(
             keyboardType: TextInputType.text,
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
-              fontSize: 16,
-            ),
             controller: _title,
             decoration: InputDecoration(
               border: InputBorder.none,
@@ -53,10 +49,6 @@ class _CreateDialogState extends State<CreateDialog> {
           ),
           TextField(
             keyboardType: TextInputType.text,
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
-              fontSize: 16,
-            ),
             controller: _desc,
             decoration: InputDecoration(
               border: InputBorder.none,

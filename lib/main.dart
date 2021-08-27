@@ -12,7 +12,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Todo',
       theme: ThemeData(
-        appBarTheme: AppBarTheme(brightness: Brightness.dark),
+        appBarTheme: AppBarTheme(
+          brightness: Brightness.dark,
+          color: ColorScheme.light().primary,
+          centerTitle: true,
+        ),
         brightness: Brightness.light,
         colorScheme: ColorScheme.light(),
         pageTransitionsTheme: PageTransitionsTheme(

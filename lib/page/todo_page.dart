@@ -113,63 +113,65 @@ class _TodoPageState extends State<TodoPage> {
           ),
           body: ListView.builder(
             itemCount: _todos.length,
-            padding: EdgeInsets.all(10),
-            itemBuilder: (context, i) => ListTile(
-              title: Text(_todos[i].title),
-              subtitle: Text(_todos[i].desc),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    onPressed: () => showDialog<TodoModel?>(
-                      context: context,
-                      builder: (builder) => CreateDialog(
-                        todo: _todos[i],
-                      ),
-                    ).then((value) {
-                      if (value != null) {
-                        _bloc.add(
-                          TodoUpdate(
-                              todo: _todos,
-                              editedTodo: value,
-                              id: _todos[i].id,
-                              index: i),
-                        );
-                      }
-                    }),
-                    icon: Icon(Icons.edit),
-                  ),
-                  IconButton(
-                    onPressed: () => showDialog<bool?>(
-                      context: context,
-                      builder: (builder) => AlertDialog(
-                        title: Text("DELETE"),
-                        content: Text("Are you sure you want to delete?"),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(null),
-                            child: Text(
-                              "CANCEL",
+            padding: EdgeInsets.all(8),
+            itemBuilder: (context, i) => Card(
+              child: ListTile(
+                title: Text(_todos[i].title),
+                subtitle: Text(_todos[i].desc),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      onPressed: () => showDialog<TodoModel?>(
+                        context: context,
+                        builder: (builder) => CreateDialog(
+                          todo: _todos[i],
+                        ),
+                      ).then((value) {
+                        if (value != null) {
+                          _bloc.add(TodoUpdate(
+                            todo: _todos,
+                            editedTodo: value,
+                            id: _todos[i].id,
+                            index: i,
+                          ));
+                          print(value);
+                        }
+                      }),
+                      icon: Icon(Icons.edit),
+                    ),
+                    IconButton(
+                      onPressed: () => showDialog<bool?>(
+                        context: context,
+                        builder: (builder) => AlertDialog(
+                          title: Text("DELETE"),
+                          content: Text("Are you sure you want to delete?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(null),
+                              child: Text(
+                                "CANCEL",
+                              ),
                             ),
-                          ),
-                          TextButton(
-                            onPressed: () => Navigator.of(context).pop(true),
-                            child: Text(
-                              "DELETE",
-                              style: TextStyle(color: Colors.red),
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(true),
+                              child: Text(
+                                "DELETE",
+                                style: TextStyle(color: Colors.red),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ).then((value) {
-                      if (value != null && value) {
-                        _bloc.add(TodoDelete(todo: _todos, id: _todos[i].id));
-                      }
-                    }),
-                    icon: Icon(Icons.delete),
-                    color: Colors.red,
-                  )
-                ],
+                          ],
+                        ),
+                      ).then((value) {
+                        if (value != null && value) {
+                          _bloc.add(TodoDelete(todo: _todos, id: _todos[i].id));
+                        }
+                      }),
+                      icon: Icon(Icons.delete),
+                      color: Colors.red,
+                    )
+                  ],
+                ),
               ),
             ),
           ),
