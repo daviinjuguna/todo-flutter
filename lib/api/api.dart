@@ -16,7 +16,7 @@ class Api {
   );
 
   Uri appUrl(String url, [Map<String, dynamic>? queryParameters]) =>
-      Uri.http(BASE_URL, url, queryParameters);
+      Uri.https(BASE_URL, url, queryParameters);
 
   Future<List<TodoModel>> getTodos() async {
     try {

@@ -7,6 +7,8 @@ class TodoInitial extends TodoState {}
 
 class TodoLoading extends TodoState {}
 
+class TodoRefreshing extends TodoState {}
+
 class TodoSuccess extends TodoState {
   final List<TodoModel> todo;
   TodoSuccess({

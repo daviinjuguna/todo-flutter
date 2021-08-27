@@ -25,6 +25,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         (todos) => TodoSuccess(todo: todos),
       );
     }
+    if (event is TodoRefresh) {
+      yield TodoRefreshing();
+      final _res = await _repo.getTodos();
+      yield _res.fold(
+        (l) => TodoError(l),
+        (todos) => TodoSuccess(todo: todos),
+      );
+    }
     if (event is TodoCreate) {
       yield TodoLoading();
       final _res = await _repo.createTodo(title: event.title, desc: event.desc);

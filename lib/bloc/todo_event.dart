@@ -5,6 +5,8 @@ abstract class TodoEvent {}
 
 class TodoGet extends TodoEvent {}
 
+class TodoRefresh extends TodoEvent {}
+
 class TodoCreate extends TodoEvent {
   final List<TodoModel> todo;
   final String title;
