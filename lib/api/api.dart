@@ -24,7 +24,8 @@ class Api {
       final _res = await _client.get(appUrl(_url));
       if (_res.statusCode != 200) throw Exception();
       final Map<String, dynamic> _body = jsonDecode(_res.body);
-      return (_body as List).map((e) => TodoModel.fromJson(e)).toList();
+      // if ((_body as List).isEmpty) return [];
+      return (_body['todo'] as List).map((e) => TodoModel.fromJson(e)).toList();
     } catch (e) {
       print(e);
       throw Exception();

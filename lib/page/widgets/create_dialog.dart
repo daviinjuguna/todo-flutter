@@ -29,7 +29,7 @@ class _CreateDialogState extends State<CreateDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: widget.todo != null ? Text("EDIT") : Text("DELETE"),
+      title: widget.todo != null ? Text("EDIT") : Text("ADD"),
       scrollable: true,
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -120,7 +120,7 @@ class _CreateDialogState extends State<CreateDialog> {
           },
           child: Text(
             "OK",
-            style: TextStyle(color: Colors.red),
+            style: TextStyle(color: Colors.green),
           ),
         ),
       ],
